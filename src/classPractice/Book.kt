@@ -1,5 +1,7 @@
 package classPractice
 
+import Constants
+
 open class Book(var title: String, var author: String, var year: String) {
     private var currentPage = 0
     open fun readPage() {
@@ -8,6 +10,13 @@ open class Book(var title: String, var author: String, var year: String) {
 
     fun titleAndAuthor(): Pair<String, String> = title to author
     fun titleAndAuthorANDYear(): Triple<String, String, String> = Triple(title, author, year)
+    fun printUrl() {
+        println(Constants.BASE_URL + "$title.html")
+    }
+
+    companion object {
+        const val BASE_URL = "https://BASE_URL.com/"
+    }
 }
 
 class eBook(title: String, author: String, var format: String = "text", year: String) : Book(title, author, year) {
