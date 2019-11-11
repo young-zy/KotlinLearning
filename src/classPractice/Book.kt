@@ -2,7 +2,7 @@ package classPractice
 
 import Constants
 
-open class Book(var title: String, var author: String, var year: String) {
+open class Book(var title: String, var author: String, var year: String, var pages: Int = 300) {
     private var currentPage = 0
     open fun readPage() {
         currentPage++
