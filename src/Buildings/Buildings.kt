@@ -14,7 +14,7 @@ class Brick : BaseBuildingMaterial() {
         get() = 8
 }
 
-class Building<T : BaseBuildingMaterial>(val buildingMaterial: BaseBuildingMaterial) {
+class Building<out T : BaseBuildingMaterial>(val buildingMaterial: T) {
     var baseMaterialsNeeded = 100
     var actualMaterialsNeeded = buildingMaterial.numberNeeded * baseMaterialsNeeded
 
