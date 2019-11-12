@@ -34,6 +34,7 @@ class Aquarium<out T : WaterSupply>(val waterSupply: T) {  //have bounds
     }
 }
 
+inline fun <reified R : WaterSupply> Aquarium<*>.hasWaterSupplyOfType() = waterSupply is R
 
 fun addItemTo(aquarium: Aquarium<WaterSupply>) = println("item added")
 
@@ -52,6 +53,11 @@ class TapWaterCleaner : Cleaner<TapWater> {
     }
 }
 
+fun <T : WaterSupply> isWaterClean(aquarium: Aquarium<T>) {
+    println("aquarium water is clean: ${aquarium.waterSupply.needsProcessed}")
+}
+
+inline fun <reified T : WaterSupply> WaterSupply.isOfType() = this is T
 
 fun genericExample() {
     val aquarium = Aquarium<TapWater>(TapWater())//bracket can be removed
@@ -68,4 +74,8 @@ fun genericExample() {
 
     val cleaner = TapWaterCleaner()
     aquarium.addWater(cleaner)
+
+    isWaterClean(aquarium)
+    aquarium.hasWaterSupplyOfType<TapWater>()   //true
+    aquarium.waterSupply.isOfType<LakeWater>()  //false
 }
