@@ -1,7 +1,11 @@
 package aquarium
 
-class Fish(val friendly: Boolean = true, volumeNeeded: Int) {
-    val size: Int
+class OldFish(val friendly: Boolean = true, volumeNeeded: Int) {
+    val size: Int = if (friendly) {
+        volumeNeeded
+    } else {
+        volumeNeeded * 2
+    }
 
     init {
         println("first init block")
@@ -12,22 +16,14 @@ class Fish(val friendly: Boolean = true, volumeNeeded: Int) {
     }
 
     init {
-        size = if (friendly) {
-            volumeNeeded
-        } else {
-            volumeNeeded * 2
-        }
-    }
-
-    init {
         println("last init block")
     }
 }
 
-fun makeDefaultFish() = Fish(true, 50) // helper function
+fun makeDefaultFish() = OldFish(true, 50) // helper function
 
 fun fishExample() {
-    val fish = Fish(true, 20)
-    println()
+    val fish = OldFish(true, 20)
+    println(fish)
 
 }
