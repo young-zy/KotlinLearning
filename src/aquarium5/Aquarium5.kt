@@ -28,9 +28,29 @@ fun fishExamples() {
     println(fish.let { it.name.capitalize() }
         .let { it + "fish" }
         .let { it + 31 })
+
+    myWith(fish.name) {
+        //Lambdas are objects
+        capitalize()
+    }
+    //without inline
+    myWith(fish.name, object : Function1<String, Unit> {
+        override fun invoke(name: String) {
+            name.capitalize()
+        }
+    })
+    //with inlined
+    myWith(fish.name) {
+        capitalize()
+    }
 }
 
+//inlining large functions increase code sizes
 
-fun myWith(name: String, block: String.() -> Unit) {
+// compiler will change the code to replace the function into the body of lambda
+
+inline fun myWith(name: String, block: String.() -> Unit) {
     name.block()
 }
+
+
