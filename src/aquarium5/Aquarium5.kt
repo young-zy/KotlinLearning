@@ -53,4 +53,13 @@ inline fun myWith(name: String, block: String.() -> Unit) {
     name.block()
 }
 
+//Single Abstract Method
+
+interface Runnable {
+    fun run()
+}
+
+interface Callable<T> {
+    fun call(): T
+}
 
